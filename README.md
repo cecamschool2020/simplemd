@@ -4,7 +4,8 @@ Fortran version:
 
 ````
 cd fortran
-# adjust compile script if necessary
+# adjust compile script if necessary.
+# in particular, you might have to set the variable FC to the name of the fortran compiler on your machine
 ./compile
 ````
 
