@@ -24,7 +24,7 @@ A script `lattice` is also present and can be used to generate initial `xyz` con
 
 ````
 cd input
-./lattice 3 > crystal.xyz
+./lattice 4 > crystal.xyz
 /path/to/simplemd.x < in
 ````
 
