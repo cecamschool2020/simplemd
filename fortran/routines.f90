@@ -376,6 +376,11 @@ subroutine compute_forces(natoms,listsize,positions,cell,forcecutoff,point,list,
 !   Notice that, in order to obtain a shifted potential, you should remove engcorrection.
 ! - the calculation of the force between the pair (iatom,jatom)
 !   this force should be added to both forces(:,iatom) and forces(:,jatom), with an opposite sign
+      engconf=engconf+4.0*(1.0/distance_pbc2**6-1.0/distance_pbc2**3)-engcorrection
+      f=2.0*distance_pbc*4.0*(6.0/distance_pbc2**7-3.0/distance_pbc2**4)
+! same force on the two atoms, with opposite sign:
+      forces(:,iatom)=forces(:,iatom)+f
+      forces(:,jatom)=forces(:,jatom)-f
     end do
   end do
 end subroutine compute_forces

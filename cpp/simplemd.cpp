@@ -263,6 +263,16 @@ void compute_forces(const int natoms,const int listsize,const vector<Vector>& po
 //   Notice that, in order to obtain a shifted potential, you should remove engcorrection.
 // - the calculation of the force between the pair (iatom,jatom)
 //   this force should be added to both forces[iatom] and forces[jatom], with an opposite sign
+      double distance_pbc6=distance_pbc2*distance_pbc2*distance_pbc2;
+      double distance_pbc8=distance_pbc6*distance_pbc2;
+      double distance_pbc12=distance_pbc6*distance_pbc6;
+      double distance_pbc14=distance_pbc12*distance_pbc2;
+      engconf+=4.0*(1.0/distance_pbc12 - 1.0/distance_pbc6) - engcorrection;
+      for(int k=0;k<3;k++) f[k]=2.0*distance_pbc[k]*4.0*(6.0/distance_pbc14-3.0/distance_pbc8);
+// same force on the two atoms, with opposite sign:
+      for(int k=0;k<3;k++) forces[iatom][k]+=f[k];
+      for(int k=0;k<3;k++) forces[jatom][k]-=f[k];
+
     }
   }
 }
